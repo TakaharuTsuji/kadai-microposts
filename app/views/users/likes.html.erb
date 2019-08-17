@@ -2,7 +2,7 @@
   <aside class="col-sm-4">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title"><%= @user.name %></h3>
+        <h4 class="card-title"><%= @user.name %>のお気に入り</h4>
       </div>
       <div class="card-body">
         <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 100 }) %>" alt="">
@@ -12,10 +12,13 @@
   
   <div class="col-sm-8">
     <ul class="list-unstyled">
-      <% @likes.each do |favo| %>
+      <% @likes.each do |likemcp| %>
         <li>
           <div>
-            <p><%= favo.content %></p>
+            <%= link_to likemcp.user.name, user_path(likemcp.user) %> <span class="text-muted">posted at <%= likemcp.created_at %></span>
+          </div>
+          <div>
+          <p><%= likemcp.id%>  <%= likemcp.content %></p>
           </div>
         </li>
       <% end %>
