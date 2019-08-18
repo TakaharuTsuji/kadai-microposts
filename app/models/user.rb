@@ -45,7 +45,7 @@ class User < ApplicationRecord
   end
 
   def likempost?(mpost)
-    self.favorites.include?(like_id: mpost.id)
+    self.likes.include?(mpost)
   end
   
 end
