@@ -19,11 +19,20 @@
             <div>
               <%= link_to likemcp.user.name, user_path(likemcp.user) %> <span class="text-muted">posted at <%= likemcp.created_at %></span>
             </div>
-          <div>
-            <p><%= likemcp.content %></p>
+            <div>
+              <p><%= likemcp.content %></p>
+            </div>
+            <% if current_user.likempost?(likemcp) %>
+              <%= form_with(model: current_user.favorites.find_by(like_id: likemcp.id), local: true, method: :delete) do |f| %>
+                <%= hidden_field_tag :like_id, likemcp.id %>
+                <%= f.submit 'unfavorite ', class: 'btn btn-sm btn-info' %>
+              <% end %>
+            <% else %>
+          <% end %>
           </div>
         </li>
       <% end %>
     </ul>
   </div>
 </div>
+
